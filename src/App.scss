@@ -1,0 +1,19 @@
+@import './custom.scss';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/bootstrap-grid';
+@import '~bootstrap/scss/variables';
+@import '~bootstrap/scss/mixins/breakpoints';
+
+* {
+  box-sizing: border-box;
+}
+
+.App {
+  margin: 0 auto;
+}
+
+@include media-breakpoint-up(lg) {
+  .App {
+    max-width: 800px;
+  }
+}
