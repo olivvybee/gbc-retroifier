@@ -11,6 +11,11 @@ export const ResultCanvas = () => {
   const renderCanvas = useRef<HTMLCanvasElement>(null);
   const outputCanvas = useRef<HTMLCanvasElement>(null);
 
+  const [wrapperRef, wrapperDimensions] = useDimensions<HTMLDivElement>();
+  const outputCanvasSize = wrapperDimensions
+    ? Math.min(wrapperDimensions.width, OUTPUT_SIZE)
+    : OUTPUT_SIZE;
+
   const { file } = useContext(FileContext);
 
   useEffect(() => {
@@ -54,7 +59,7 @@ export const ResultCanvas = () => {
   }, [file]);
 
   return (
-    <>
+    <div id="canvas-wrapper" ref={wrapperRef}>
       <canvas
         id="render-canvas"
         ref={renderCanvas}
@@ -66,7 +71,12 @@ export const ResultCanvas = () => {
         ref={outputCanvas}
         width={OUTPUT_SIZE}
         height={OUTPUT_SIZE}
+        style={{
+          width: outputCanvasSize,
+          height: outputCanvasSize,
+          maxWidth: '100%',
+        }}
       />
-    </>
+    </div>
   );
 };

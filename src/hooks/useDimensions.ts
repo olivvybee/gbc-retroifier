@@ -14,12 +14,21 @@ export const useDimensions = <T extends HTMLElement>(): [
   const ref = useRef<T>(null);
   const [dimensions, setDimensions] = useState<Dimensions>();
 
-  useLayoutEffect(() => {
+  const measure = () => {
     const rect = ref.current?.getBoundingClientRect();
     if (rect) {
       const { x, y, width, height } = rect;
       setDimensions({ x, y, width, height });
     }
+  };
+
+  useLayoutEffect(() => {
+    measure();
+    window.addEventListener('resize', measure);
+
+    return () => {
+      window.removeEventListener('resize', measure);
+    };
   }, []);
 
   return [ref, dimensions];
