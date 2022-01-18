@@ -38,11 +38,7 @@ export const ImageSelectionForm: React.FC = () => {
     });
 
   return (
-    <div
-      {...getRootProps()}
-      className={classnames('dropzone', 'btn', 'btn-primary', {
-        active: isDragActive,
-      })}>
+    <div {...getRootProps()} className="dropzone btn btn-primary d-flex">
       <input {...getInputProps()} />
       {acceptedFiles.length > 0 ? (
         <>

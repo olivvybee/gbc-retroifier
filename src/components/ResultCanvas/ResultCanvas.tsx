@@ -13,7 +13,7 @@ export const ResultCanvas = () => {
 
   const [wrapperRef, wrapperDimensions] = useDimensions<HTMLDivElement>();
   const outputCanvasSize = wrapperDimensions
-    ? Math.min(wrapperDimensions.width, OUTPUT_SIZE)
+    ? wrapperDimensions.width
     : OUTPUT_SIZE;
 
   const { file } = useContext(FileContext);

@@ -3,23 +3,31 @@ import { ImageSelectionForm } from './components/ImageSelectionForm';
 import { ResultCanvas } from './components/ResultCanvas';
 
 import './App.scss';
+import { SettingsPanel } from './components/SettingsPanel';
 
 function App() {
   return (
-    <div className="App">
-      <div className="container-md">
-        <div className="row">
-          <div className="col-md-8 d-flex flex-column align-items-center">
-            <FileContextProvider>
+    <FileContextProvider>
+      <div className="App">
+        <div className="container-md my-4">
+          <div className="row mb-4">
+            <div className="col-12">
               <ImageSelectionForm />
-              <ResultCanvas />
-            </FileContextProvider>
+            </div>
           </div>
 
-          <div className="col-md-4">hi</div>
+          <div className="row">
+            <div className="col d-flex flex-column align-items-center">
+              <ResultCanvas />
+            </div>
+
+            <div className="col-md-4">
+              <SettingsPanel />
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </FileContextProvider>
   );
 }
 

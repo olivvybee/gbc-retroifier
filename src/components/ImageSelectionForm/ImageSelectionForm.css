@@ -1,14 +1,11 @@
 .dropzone {
   border: 1px dashed lightgray;
-  border-radius: 8px;
+  border-radius: 4px;
   cursor: pointer;
   display: flex;
   flex-direction: row;
   align-items: center;
-}
-
-.dropzone.active {
-  background-color: pink;
+  justify-content: center;
 }
 
 .accepted-file {
@@ -18,6 +15,8 @@
 }
 
 .icon-wrapper {
+  height: 48px;
+  width: 48px;
   margin-right: 16px;
   padding: 8px;
 }
