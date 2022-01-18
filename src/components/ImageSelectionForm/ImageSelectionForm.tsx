@@ -1,13 +1,16 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
+import { FileContext } from '../../context';
+
 import './ImageSelectionForm.css';
 
 export const ImageSelectionForm: React.FC = () => {
   const [previewUrl, setPreviewUrl] = useState<string>();
+  const { file, setFile } = useContext(FileContext);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -15,12 +18,17 @@ export const ImageSelectionForm: React.FC = () => {
         return;
       }
 
-      const file = acceptedFiles[0];
+      setFile(acceptedFiles[0]);
+    },
+    [setFile]
+  );
+
+  useEffect(() => {
+    if (file) {
       const url = URL.createObjectURL(file);
       setPreviewUrl(url);
-    },
-    [setPreviewUrl]
-  );
+    }
+  }, [file, setPreviewUrl]);
 
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({
