@@ -1,9 +1,14 @@
 import { useContext, useEffect, useRef } from 'react';
 
-import { OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
+import { COLOUR_PALETTES, OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
 import { FileContext, SettingsContext } from '../../context';
 import { useDimensions } from '../../hooks';
-import { cropToSquare, retroify, scale } from '../../image-manipulation';
+import {
+  cropToSquare,
+  recolour,
+  retroify,
+  scale,
+} from '../../image-manipulation';
 
 import './ResultCanvas.scss';
 
@@ -49,8 +54,10 @@ export const ResultCanvas = () => {
 
       const pixels = renderCtx.getImageData(0, 0, RENDER_SIZE, RENDER_SIZE);
 
-      const retroified = retroify(pixels, brightness, contrast);
-      const scaled = scale(retroified, OUTPUT_SIZE);
+      retroify(pixels, brightness, contrast);
+      recolour(pixels, COLOUR_PALETTES[0]);
+
+      const scaled = scale(pixels, OUTPUT_SIZE);
 
       outputCtx.putImageData(scaled, 0, 0);
     };

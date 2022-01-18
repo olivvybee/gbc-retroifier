@@ -20,8 +20,7 @@ export const retroify = (
   brightness: number,
   contrast: number
 ) => {
-  const { width, height } = pixels;
-  let data = pixels.data;
+  const { data, width, height } = pixels;
 
   for (let y = 0; y < height; y++) {
     for (let x = 0; x < width; x++) {
@@ -50,7 +49,7 @@ export const retroify = (
       // 64 is 256 / 4 so dividing the greyscale values by 64 and rounding
       // gives results in the range 0-3.
       // Multiplying by 64 again spreads the four values out across 0-255.
-      const quantised = Math.round(filtered / 64) * 64;
+      const quantised = clamp(Math.round(filtered / 64), 0, 3) * 64;
 
       const finalValue = quantised;
 
