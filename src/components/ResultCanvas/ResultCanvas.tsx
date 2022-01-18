@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from 'react';
 import { OUTPUT_SIZE } from '../../constants';
 import { FileContext } from '../../context';
 import { useDimensions } from '../../hooks';
+import { cropToSquare } from '../../image-manipulation';
 
 export const ResultCanvas = () => {
   const canvas = useRef<HTMLCanvasElement>(null);
@@ -9,7 +10,9 @@ export const ResultCanvas = () => {
 
   const { file } = useContext(FileContext);
 
-  const canvasSize = wrapperDimensions ? wrapperDimensions.width : OUTPUT_SIZE;
+  const canvasSize = wrapperDimensions
+    ? Math.min(wrapperDimensions.width, OUTPUT_SIZE)
+    : OUTPUT_SIZE;
 
   useEffect(() => {
     if (!file || !canvas.current) {
@@ -23,7 +26,8 @@ export const ResultCanvas = () => {
 
     const image = new Image();
     image.onload = () => {
-      ctx.drawImage(image, 0, 0, canvasSize, canvasSize);
+      const { x, y, size } = cropToSquare(image);
+      ctx.drawImage(image, x, y, size, size, 0, 0, canvasSize, canvasSize);
       URL.revokeObjectURL(image.src);
     };
 
