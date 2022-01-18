@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 
 import { OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
-import { FileContext } from '../../context';
+import { FileContext, SettingsContext } from '../../context';
 import { useDimensions } from '../../hooks';
 import { cropToSquare, retroify, scale } from '../../image-manipulation';
 
@@ -17,6 +17,7 @@ export const ResultCanvas = () => {
     : OUTPUT_SIZE;
 
   const { file } = useContext(FileContext);
+  const { brightness, contrast } = useContext(SettingsContext);
 
   useEffect(() => {
     if (!file || !renderCanvas.current || !outputCanvas.current) {
@@ -48,7 +49,7 @@ export const ResultCanvas = () => {
 
       const pixels = renderCtx.getImageData(0, 0, RENDER_SIZE, RENDER_SIZE);
 
-      const retroified = retroify(pixels);
+      const retroified = retroify(pixels, brightness, contrast);
       const scaled = scale(retroified, OUTPUT_SIZE);
 
       outputCtx.putImageData(scaled, 0, 0);
@@ -56,7 +57,7 @@ export const ResultCanvas = () => {
 
     const url = URL.createObjectURL(file);
     image.src = url;
-  }, [file]);
+  }, [file, brightness, contrast]);
 
   return (
     <div id="canvas-wrapper" ref={wrapperRef}>

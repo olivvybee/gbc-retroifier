@@ -15,7 +15,11 @@ const bayer8 = [
 const clamp = (n: number, min: number, max: number) =>
   Math.max(min, Math.min(n, max));
 
-export const retroify = (pixels: ImageData) => {
+export const retroify = (
+  pixels: ImageData,
+  brightness: number,
+  contrast: number
+) => {
   const { width, height } = pixels;
   let data = pixels.data;
 
@@ -34,8 +38,13 @@ export const retroify = (pixels: ImageData) => {
 
       const greyscale = r * 0.3 + g * 0.59 + b * 0.11;
 
+      const withContrast = (greyscale / 255 - 0.5) * contrast + 0.5;
+      const withBrightness =
+        Math.pow(clamp(withContrast, 0, 1), brightness) * 255;
+      const levelled = clamp(withBrightness, 0, 255);
+
       // Apply the bayer filter
-      const filtered = clamp(greyscale + (bayer - 32) * 0.75, 0, 255);
+      const filtered = clamp(levelled + (bayer - 32) * 0.75, 0, 255);
 
       // Quantise to 4 possible values
       // 64 is 256 / 4 so dividing the greyscale values by 64 and rounding
