@@ -1,48 +1,72 @@
 import { useContext, useEffect, useRef } from 'react';
-import { OUTPUT_SIZE } from '../../constants';
+
+import { OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
 import { FileContext } from '../../context';
 import { useDimensions } from '../../hooks';
-import { cropToSquare } from '../../image-manipulation';
+import { cropToSquare, retroify, scale } from '../../image-manipulation';
+
+import './ResultCanvas.scss';
 
 export const ResultCanvas = () => {
-  const canvas = useRef<HTMLCanvasElement>(null);
-  const [wrapperRef, wrapperDimensions] = useDimensions<HTMLDivElement>();
+  const renderCanvas = useRef<HTMLCanvasElement>(null);
+  const outputCanvas = useRef<HTMLCanvasElement>(null);
 
   const { file } = useContext(FileContext);
 
-  const canvasSize = wrapperDimensions
-    ? Math.min(wrapperDimensions.width, OUTPUT_SIZE)
-    : OUTPUT_SIZE;
-
   useEffect(() => {
-    if (!file || !canvas.current) {
+    if (!file || !renderCanvas.current || !outputCanvas.current) {
       return;
     }
 
-    const ctx = canvas.current.getContext('2d');
-    if (!ctx) {
+    const renderCtx = renderCanvas.current.getContext('2d');
+    const outputCtx = outputCanvas.current.getContext('2d');
+
+    if (!renderCtx || !outputCtx) {
       return;
     }
 
     const image = new Image();
     image.onload = () => {
       const { x, y, size } = cropToSquare(image);
-      ctx.drawImage(image, x, y, size, size, 0, 0, canvasSize, canvasSize);
+      renderCtx.drawImage(
+        image,
+        x,
+        y,
+        size,
+        size,
+        0,
+        0,
+        RENDER_SIZE,
+        RENDER_SIZE
+      );
       URL.revokeObjectURL(image.src);
+
+      const pixels = renderCtx.getImageData(0, 0, RENDER_SIZE, RENDER_SIZE);
+
+      const retroified = retroify(pixels);
+      const scaled = scale(retroified, OUTPUT_SIZE);
+
+      outputCtx.putImageData(scaled, 0, 0);
     };
 
     const url = URL.createObjectURL(file);
     image.src = url;
-  }, [file, canvasSize]);
+  }, [file]);
 
   return (
-    <div ref={wrapperRef}>
+    <>
       <canvas
-        className="result-canvas"
-        ref={canvas}
-        width={canvasSize}
-        height={canvasSize}
+        id="render-canvas"
+        ref={renderCanvas}
+        width={RENDER_SIZE}
+        height={RENDER_SIZE}
       />
-    </div>
+      <canvas
+        id="result-canvas"
+        ref={outputCanvas}
+        width={OUTPUT_SIZE}
+        height={OUTPUT_SIZE}
+      />
+    </>
   );
 };

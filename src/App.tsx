@@ -9,8 +9,12 @@ function App() {
     <div className="App">
       <div className="container-md">
         <FileContextProvider>
-          <ImageSelectionForm />
-          <ResultCanvas />
+          <div className="col-12">
+            <ImageSelectionForm />
+          </div>
+          <div className="col-12">
+            <ResultCanvas />
+          </div>
         </FileContextProvider>
       </div>
     </div>
