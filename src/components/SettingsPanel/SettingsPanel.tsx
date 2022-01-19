@@ -57,13 +57,22 @@ export const SettingsPanel = () => {
 
       <div className="my-3">
         <span className="fs-6">Colour palette</span>
-        <Stepper<Palette>
-          value={palette}
-          possibleValues={COLOUR_PALETTES}
-          onChange={setPalette}
-          allowWrapping={true}
-          getLabel={getPalettePreview}
-        />
+        <div id="palette-wrapper">
+          <Stepper<Palette>
+            value={palette}
+            possibleValues={COLOUR_PALETTES}
+            onChange={setPalette}
+            allowWrapping={true}
+            getLabel={getPalettePreview}
+          />
+          {palette.source ? (
+            <a href={palette.source} className="link-light">
+              {palette.name}
+            </a>
+          ) : (
+            <span>{palette.name}</span>
+          )}
+        </div>
       </div>
     </div>
   );
