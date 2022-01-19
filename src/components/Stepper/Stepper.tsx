@@ -3,7 +3,7 @@ interface StepperProps<T = number> {
   value: T;
   onChange: (newValue: T) => void;
   allowWrapping?: boolean;
-  getLabel?: (value: T, currentIndex: number) => string;
+  getLabel?: (value: T, currentIndex: number) => React.ReactElement;
 }
 
 export const Stepper = <T,>({
@@ -11,7 +11,7 @@ export const Stepper = <T,>({
   value,
   onChange,
   allowWrapping = false,
-  getLabel = (value) => String(value),
+  getLabel = (value) => <span>{value}</span>,
 }: StepperProps<T>) => {
   const currentIndex = possibleValues.findIndex((item) => item === value);
 
@@ -39,7 +39,7 @@ export const Stepper = <T,>({
         disabled={prevIndex === -1}>
         ◀
       </button>
-      <span className="mx-3">{getLabel(value, currentIndex)}</span>
+      {getLabel(value, currentIndex)}
       <button
         type="button"
         className="btn btn-primary"

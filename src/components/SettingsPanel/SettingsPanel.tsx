@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from 'react';
 import { COLOUR_PALETTES } from '../../constants';
 import { SettingsContext } from '../../context';
 import { Palette } from '../../types';
+import { PalettePreview } from '../PalettePreview';
 import { Stepper } from '../Stepper';
 import './SettingsPanel.scss';
 
@@ -18,8 +19,15 @@ export const SettingsPanel = () => {
     setPalette,
   } = useContext(SettingsContext);
 
-  const getLabel = (value: number, currentIndex: number) =>
-    String(currentIndex);
+  const getLabel = (_: number, currentIndex: number) => (
+    <span className="stepper-label">{currentIndex}</span>
+  );
+
+  const getPalettePreview = (value: Palette) => (
+    <div className="px-3">
+      <PalettePreview palette={value} />
+    </div>
+  );
 
   return (
     <div id="settings-panel" className="p-3">
@@ -54,7 +62,7 @@ export const SettingsPanel = () => {
           possibleValues={COLOUR_PALETTES}
           onChange={setPalette}
           allowWrapping={true}
-          getLabel={(palette) => palette.name}
+          getLabel={getPalettePreview}
         />
       </div>
     </div>
