@@ -1,5 +1,3 @@
-import { RENDER_SIZE } from '../constants';
-
 // 8 x 8 Bayer constants Matrix
 const bayer8 = [
   [0, 48, 12, 60, 3, 51, 15, 63],

@@ -12,6 +12,7 @@ export const PalettePreview: React.FC<PalettePreviewProps> = ({ palette }) => (
     className="d-flex flex-direction-row align-items-center">
     {palette.colours.map((colour) => (
       <div
+        key={colour}
         className="preview-block"
         title={colour}
         style={{ backgroundColor: colour }}

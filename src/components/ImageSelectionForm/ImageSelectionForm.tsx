@@ -1,6 +1,5 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 
@@ -30,12 +29,11 @@ export const ImageSelectionForm: React.FC = () => {
     }
   }, [file, setPreviewUrl]);
 
-  const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone({
-      onDrop,
-      accept: 'image/jpeg, image/png',
-      multiple: false,
-    });
+  const { getRootProps, getInputProps, acceptedFiles } = useDropzone({
+    onDrop,
+    accept: 'image/jpeg, image/png',
+    multiple: false,
+  });
 
   return (
     <div {...getRootProps()} className="dropzone btn btn-primary d-flex">

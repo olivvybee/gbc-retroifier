@@ -1,6 +1,6 @@
 import { useContext, useEffect, useRef } from 'react';
 
-import { COLOUR_PALETTES, OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
+import { OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
 import { DownloadContext, FileContext, SettingsContext } from '../../context';
 import { useDimensions } from '../../hooks';
 import {
@@ -46,7 +46,7 @@ export const ResultCanvas = () => {
     // setState allows a function to be passed that returns the value to set
     // so to set a function you have to pass it with one extra level of abstraction
     setDownloadResult(() => downloadResult);
-  }, []);
+  }, [setDownloadResult]);
 
   useEffect(() => {
     if (!file || !renderCanvas.current || !outputCanvas.current) {

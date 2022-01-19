@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { COLOUR_PALETTES } from '../../constants';
 import { SettingsContext } from '../../context';
 import { Palette } from '../../types';

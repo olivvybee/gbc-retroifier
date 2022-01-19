@@ -35,9 +35,11 @@ export const PalettesPage = () => {
             ) : (
               <div className="me-2" style={{ width: 16 }} />
             )}
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a href="#" onClick={createOnClick(palette)}>
               <PalettePreview palette={palette} />
             </a>
+            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
             <a href="#" onClick={createOnClick(palette)}>
               <span className="ms-2">{palette.name}</span>
             </a>
