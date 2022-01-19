@@ -1,5 +1,7 @@
-import { createContext, useState } from 'react';
+import { createContext } from 'react';
+
 import { COLOUR_PALETTES } from '../constants';
+import { useLocalStorage } from '../hooks';
 import { Palette } from '../types';
 
 interface SettingsContextShape {
@@ -21,9 +23,9 @@ export const SettingsContext = createContext<SettingsContextShape>({
 });
 
 export const SettingsContextProvider: React.FC = ({ children }) => {
-  const [brightness, setBrightness] = useState(1);
-  const [contrast, setContrast] = useState(1.5);
-  const [palette, setPalette] = useState<Palette>(COLOUR_PALETTES[0]);
+  const [brightness, setBrightness] = useLocalStorage('brightness', 1);
+  const [contrast, setContrast] = useLocalStorage('contrast', 1.5);
+  const [palette, setPalette] = useLocalStorage('palette', COLOUR_PALETTES[0]);
 
   return (
     <SettingsContext.Provider
