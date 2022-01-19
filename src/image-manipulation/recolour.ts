@@ -21,8 +21,6 @@ export const recolour = (pixels: ImageData, palette: Palette) => {
       parseInt(str, 16)
     );
 
-    console.log({ r, g, b });
-
     data[i] = r;
     data[i + 1] = g;
     data[i + 2] = b;

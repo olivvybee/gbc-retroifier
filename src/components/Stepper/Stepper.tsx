@@ -28,8 +28,6 @@ export const Stepper = <T,>({
     prevIndex = currentIndex > 0 ? currentIndex - 1 : -1;
   }
 
-  console.log({ currentIndex, nextIndex, prevIndex });
-
   return (
     <div className="d-flex align-items-center gx-3 mt-1">
       <button
