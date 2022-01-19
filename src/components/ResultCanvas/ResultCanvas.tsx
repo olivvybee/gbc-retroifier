@@ -22,7 +22,7 @@ export const ResultCanvas = () => {
     : OUTPUT_SIZE;
 
   const { file } = useContext(FileContext);
-  const { brightness, contrast } = useContext(SettingsContext);
+  const { brightness, contrast, palette } = useContext(SettingsContext);
 
   useEffect(() => {
     if (!file || !renderCanvas.current || !outputCanvas.current) {
@@ -55,7 +55,7 @@ export const ResultCanvas = () => {
       const pixels = renderCtx.getImageData(0, 0, RENDER_SIZE, RENDER_SIZE);
 
       retroify(pixels, brightness, contrast);
-      recolour(pixels, COLOUR_PALETTES[0]);
+      recolour(pixels, palette);
 
       const scaled = scale(pixels, OUTPUT_SIZE);
 
@@ -64,7 +64,7 @@ export const ResultCanvas = () => {
 
     const url = URL.createObjectURL(file);
     image.src = url;
-  }, [file, brightness, contrast]);
+  }, [file, brightness, contrast, palette]);
 
   return (
     <div id="canvas-wrapper" ref={wrapperRef}>
