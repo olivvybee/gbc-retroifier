@@ -15,8 +15,8 @@ export const SettingsContext = createContext<SettingsContextShape>({
 });
 
 export const SettingsContextProvider: React.FC = ({ children }) => {
-  const [brightness, setBrightness] = useState(3);
-  const [contrast, setContrast] = useState(50);
+  const [brightness, setBrightness] = useState(1);
+  const [contrast, setContrast] = useState(1.5);
 
   return (
     <SettingsContext.Provider
