@@ -65,13 +65,7 @@ export const SettingsPanel = () => {
             allowWrapping={true}
             getLabel={getPalettePreview}
           />
-          {palette.source ? (
-            <a href={palette.source} className="link-light">
-              {palette.name}
-            </a>
-          ) : (
-            <span>{palette.name}</span>
-          )}
+          <span>{palette.name}</span>
         </div>
       </div>
     </div>
