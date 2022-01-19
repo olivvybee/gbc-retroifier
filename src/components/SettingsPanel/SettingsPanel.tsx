@@ -30,7 +30,7 @@ export const SettingsPanel = () => {
   );
 
   return (
-    <div id="settings-panel" className="p-3">
+    <div id="settings-panel" className="p-3 w-100">
       <span className="fs-5">Settings</span>
 
       <div className="my-3">

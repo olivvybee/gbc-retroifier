@@ -1,6 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { FileContextProvider, SettingsContextProvider } from './context';
+import {
+  DownloadContextProvider,
+  FileContextProvider,
+  SettingsContextProvider,
+} from './context';
 import { Homepage, PalettesPage } from './pages';
 
 import './App.scss';
@@ -11,13 +15,15 @@ function App() {
     <Router>
       <FileContextProvider>
         <SettingsContextProvider>
-          <Navbar />
-          <div className="App">
-            <Routes>
-              <Route path="*" element={<Homepage />} />
-              <Route path="/palettes" element={<PalettesPage />} />
-            </Routes>
-          </div>
+          <DownloadContextProvider>
+            <Navbar />
+            <div className="App">
+              <Routes>
+                <Route path="*" element={<Homepage />} />
+                <Route path="/palettes" element={<PalettesPage />} />
+              </Routes>
+            </div>
+          </DownloadContextProvider>
         </SettingsContextProvider>
       </FileContextProvider>
     </Router>

@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { DownloadButton } from '../components/DownloadButton';
 import { ImageSelectionForm } from '../components/ImageSelectionForm';
 import { ResultCanvas } from '../components/ResultCanvas';
 import { SettingsPanel } from '../components/SettingsPanel';
@@ -16,11 +17,18 @@ export const Homepage = () => {
       </div>
 
       <div className="row">
-        <div className="col d-flex flex-column align-items-center">
+        <div className="col d-flex flex-column align-items-center mb-3">
           <ResultCanvas />
         </div>
 
-        <div className="col-md-4">{!!file && <SettingsPanel />}</div>
+        <div className="col-md-4 d-flex flex-column align-items-center">
+          {!!file && (
+            <div className="mb-3">
+              <DownloadButton />
+            </div>
+          )}
+          {!!file && <SettingsPanel />}
+        </div>
       </div>
     </div>
   );
