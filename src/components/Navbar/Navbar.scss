@@ -1,0 +1,38 @@
+#navbar {
+  background-color: #140d17;
+  height: 64px;
+}
+
+#navbar-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.navbar-brand {
+  margin-right: 32px;
+}
+
+.navbar-brand h1 {
+  margin-bottom: 0;
+}
+
+.nav-item {
+  height: 64px;
+
+  &:hover,
+  &:focus {
+    background-color: #26182a;
+  }
+}
+
+.nav-item-link {
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  text-decoration: none;
+}
