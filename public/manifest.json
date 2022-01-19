@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Retroifier",
+  "name": "Tool for making images look like they came from a gameboy camera",
   "icons": [
     {
       "src": "favicon.ico",
