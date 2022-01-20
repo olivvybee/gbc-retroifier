@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDownload } from '@fortawesome/free-solid-svg-icons';
 
 import { FileContext, ResultContext } from '../../context';
+
+import './DownloadButton.scss';
 
 export const DownloadButton = () => {
   const { resultDataUrl } = useContext(ResultContext);
@@ -26,14 +26,11 @@ export const DownloadButton = () => {
     document.body.appendChild(element);
     element.click();
     document.body.removeChild(element);
-  }, [resultDataUrl]);
+  }, [resultDataUrl, file]);
 
   return (
-    <button
-      className="btn btn-primary d-flex align-items-center"
-      onClick={download}>
-      <FontAwesomeIcon icon={faDownload} className="me-2" />
-      Download result
+    <button id="download-button" onClick={download}>
+      download it
     </button>
   );
 };

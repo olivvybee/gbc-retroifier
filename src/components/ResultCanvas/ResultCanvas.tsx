@@ -15,6 +15,7 @@ import './ResultCanvas.scss';
 export const ResultCanvas = () => {
   const renderCanvas = useRef<HTMLCanvasElement>(null);
   const outputCanvas = useRef<HTMLCanvasElement>(null);
+  const outputImg = useRef<HTMLImageElement>(null);
 
   const [wrapperRef, wrapperDimensions] = useDimensions<HTMLDivElement>();
   const outputCanvasSize = wrapperDimensions
@@ -62,15 +63,16 @@ export const ResultCanvas = () => {
 
       outputCtx.putImageData(scaled, 0, 0);
 
-      if (outputCanvas.current) {
+      if (outputCanvas.current && outputImg.current) {
         const url = outputCanvas.current.toDataURL('image/png');
         setResultDataUrl(url);
+        outputImg.current.src = url;
       }
     };
 
     const url = URL.createObjectURL(file);
     image.src = url;
-  }, [file, brightness, contrast, palette]);
+  }, [file, brightness, contrast, palette, setResultDataUrl]);
 
   return (
     <div id="canvas-wrapper" ref={wrapperRef}>
@@ -81,15 +83,19 @@ export const ResultCanvas = () => {
         height={RENDER_SIZE}
       />
       <canvas
-        id="result-canvas"
+        id="output-canvas"
         ref={outputCanvas}
         width={OUTPUT_SIZE}
         height={OUTPUT_SIZE}
+      />
+      <img
+        ref={outputImg}
         style={{
           width: outputCanvasSize,
           height: outputCanvasSize,
           maxWidth: '100%',
         }}
+        alt="Result of the retroifier"
       />
     </div>
   );

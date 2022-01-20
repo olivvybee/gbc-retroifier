@@ -24,7 +24,9 @@ export const Homepage = () => {
         <div className="col-md-4 d-flex flex-column align-items-center">
           {!!file && (
             <div className="mb-3">
-              <DownloadButton />
+              <p>
+                Tap and hold the image to save, or <DownloadButton />.
+              </p>
             </div>
           )}
           {!!file && <SettingsPanel />}
