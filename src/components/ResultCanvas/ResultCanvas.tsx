@@ -67,6 +67,7 @@ export const ResultCanvas = () => {
         const url = outputCanvas.current.toDataURL('image/png');
         setResultDataUrl(url);
         outputImg.current.src = url;
+        outputImg.current.style.display = 'block';
       }
     };
 
@@ -89,8 +90,10 @@ export const ResultCanvas = () => {
         height={OUTPUT_SIZE}
       />
       <img
+        id="output-img"
         ref={outputImg}
         style={{
+          display: 'none',
           width: outputCanvasSize,
           height: outputCanvasSize,
           maxWidth: '100%',
