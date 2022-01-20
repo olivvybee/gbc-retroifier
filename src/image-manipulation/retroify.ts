@@ -1,3 +1,9 @@
+/**
+ * This code is heavily based on the original by maple "mavica" syrup (https://maple.pet)
+ * and is used under the "beerware license".
+ * https://github.com/Lana-chan/webgbcam
+ */
+
 // 8 x 8 Bayer constants Matrix
 const bayer8 = [
   [0, 48, 12, 60, 3, 51, 15, 63],
