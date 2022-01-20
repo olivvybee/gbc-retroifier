@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef } from 'react';
 
 import { OUTPUT_SIZE, RENDER_SIZE } from '../../constants';
-import { DownloadContext, FileContext, SettingsContext } from '../../context';
+import { ResultContext, FileContext, SettingsContext } from '../../context';
 import { useDimensions } from '../../hooks';
 import {
   cropToSquare,
@@ -23,30 +23,7 @@ export const ResultCanvas = () => {
 
   const { file } = useContext(FileContext);
   const { brightness, contrast, palette } = useContext(SettingsContext);
-  const { setDownloadResult } = useContext(DownloadContext);
-
-  useEffect(() => {
-    const downloadResult = () => {
-      if (!outputCanvas.current) {
-        return;
-      }
-
-      const content = outputCanvas.current.toDataURL('image/png');
-
-      const element = document.createElement('a');
-      element.style.display = 'none';
-      element.setAttribute('href', content);
-      element.setAttribute('download', 'retro.png');
-
-      document.body.appendChild(element);
-      element.click();
-      document.body.removeChild(element);
-    };
-
-    // setState allows a function to be passed that returns the value to set
-    // so to set a function you have to pass it with one extra level of abstraction
-    setDownloadResult(() => downloadResult);
-  }, [setDownloadResult]);
+  const { setResultDataUrl } = useContext(ResultContext);
 
   useEffect(() => {
     if (!file || !renderCanvas.current || !outputCanvas.current) {
@@ -84,6 +61,11 @@ export const ResultCanvas = () => {
       const scaled = scale(pixels, OUTPUT_SIZE);
 
       outputCtx.putImageData(scaled, 0, 0);
+
+      if (outputCanvas.current) {
+        const url = outputCanvas.current.toDataURL('image/png');
+        setResultDataUrl(url);
+      }
     };
 
     const url = URL.createObjectURL(file);

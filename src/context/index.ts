@@ -1,3 +1,3 @@
-export * from './DownloadContext';
+export * from './ResultContext';
 export * from './FileContext';
 export * from './SettingsContext';

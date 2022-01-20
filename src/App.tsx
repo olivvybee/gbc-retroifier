@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import {
-  DownloadContextProvider,
+  ResultContextProvider,
   FileContextProvider,
   SettingsContextProvider,
 } from './context';
@@ -15,7 +15,7 @@ function App() {
     <Router>
       <FileContextProvider>
         <SettingsContextProvider>
-          <DownloadContextProvider>
+          <ResultContextProvider>
             <Navbar />
             <div className="App">
               <Routes>
@@ -23,7 +23,7 @@ function App() {
                 <Route path="/palettes" element={<PalettesPage />} />
               </Routes>
             </div>
-          </DownloadContextProvider>
+          </ResultContextProvider>
         </SettingsContextProvider>
       </FileContextProvider>
     </Router>
