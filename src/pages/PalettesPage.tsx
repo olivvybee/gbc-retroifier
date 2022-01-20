@@ -6,6 +6,7 @@ import { PalettePreview } from '../components/PalettePreview';
 import { COLOUR_PALETTES } from '../constants';
 import { SettingsContext } from '../context';
 import { Palette } from '../types';
+import { Link } from 'react-router-dom';
 
 export const PalettesPage = () => {
   const { palette: selectedPalette, setPalette } = useContext(SettingsContext);
@@ -17,7 +18,9 @@ export const PalettesPage = () => {
 
   return (
     <div className="container-md my-4">
-      <h2 className="mb-4">Colour palettes</h2>
+      <Link to="/">◀ Return home</Link>
+
+      <h2 className="my-4">Colour palettes</h2>
 
       <p>Click a palette to apply it on the main page.</p>
       <p>Hover over the colour swatches to see the hex code for each colour.</p>
