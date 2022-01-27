@@ -18,11 +18,11 @@ export const AboutPage = () => (
       in the output, so there are no scaling artefacts.
     </p>
     <p>
-      This tool was created by{' '}
+      This specific tool was created by{' '}
       <a href="https://twitter.com/olivvybee" target="_blank" rel="noreferrer">
         @olivvybee
-      </a>{' '}
-      and is based on{' '}
+      </a>
+      , but the idea and much of the code is based on{' '}
       <a href="https://maple.pet/webgbcam" target="_blank" rel="noreferrer">
         webgbcam by maple "mavica" syrup
       </a>
