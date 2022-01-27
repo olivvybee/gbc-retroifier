@@ -5,7 +5,7 @@ import {
   FileContextProvider,
   SettingsContextProvider,
 } from './context';
-import { Homepage, PalettesPage } from './pages';
+import { AboutPage, Homepage, PalettesPage } from './pages';
 
 import './App.scss';
 import { Navbar } from './components/Navbar';
@@ -21,6 +21,7 @@ function App() {
               <Routes>
                 <Route path="*" element={<Homepage />} />
                 <Route path="/palettes" element={<PalettesPage />} />
+                <Route path="/about" element={<AboutPage />} />
               </Routes>
             </div>
           </ResultContextProvider>

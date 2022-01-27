@@ -15,6 +15,12 @@ export const Navbar = () => (
             Colour palettes
           </Link>
         </li>
+
+        <li className="nav-item">
+          <Link to="/about" className="nav-item-link link-light">
+            About
+          </Link>
+        </li>
       </ul>
     </div>
   </nav>
